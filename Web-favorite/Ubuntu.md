@@ -3,6 +3,10 @@
 1. 安装: `sudo dpkg -i <package.deb>`, (`-i`==`--install`)
 2. 查看详细信息: `sudo dpkg -I <package.deb>`, (`-I`==`--info`)
 3. 查看文件结构: `sudo dpkg -c <package.deb>`, (`-c`==`--contents`)
+4. 卸载:
+    + 通过`dpkg -l`查看deb包安装后的名字
+    + `sudo dpkg -r 上面的包名字`
+    + `sudo dpkg -P 上面的包名字`做一次清除
 ## 已安装的软件
 1. 查看信息: `sudo dpkg -l <package>`, (`-l`==`--list`)
 2. 查看所需文件: `sudo dpkg -L <package>`, (`-L`==`--listfiles`)
@@ -155,3 +159,15 @@
     + 有时候因为安装的根分区距离 MBR 太远无法引导，于是流行在`C:\`盘后面紧跟着建立一个100、200M 的`/boot`分区，以防无法启动。
 3. 在现在的硬件条件下，完全没有必要划分 boot 分区，那只会带来麻烦，容量如果太小，会使你无法安装、升级新内核。现在实际上只需要一个根分区挂在`/`，一个 HOME 分区挂在`/home`，连`/swap`分区都可有可无，因为完全可以用`swapfile`代替。
     + 单独的HOME分区是为了保护你的个人文件安全，防止系统崩溃时丢失文件。
+
+# Could not access KVM kernel module: Permission denied
+1. 是否支持硬件虚拟化: `grep -Eoc '(vmx|svm)' /proc/cpuinfo`, 0 表示不支持, 大于零则为支持的核心数
+2. 系统是否可以运行kvm: `kvm-ok`, 该工具包含在`cpu-checker`包里
+3. 将用户添加到 kvm 组: `sudo usermod -aG kvm $USER`
+4. 启动/卸载(自动识别) kvm 内核模块
+    + `sudo modprobe kvm`
+    + `sudo modprobe kvm_intel`
+5. 卸载
+    + `sudo rmmod kvm`
+
+# ln -s src tgr 的 src 最好用绝对路径

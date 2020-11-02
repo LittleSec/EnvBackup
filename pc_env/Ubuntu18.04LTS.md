@@ -46,6 +46,7 @@ make -j4
 sudo make install
 ```
 5. 卸载：`rm -rf $(cat build/install_manifest.txt)`
+6. 直接装 **Pre-Built Binaries** 的一个风险：若缺乏某些依赖，使用时不一定会报错，只是运行结果可能与预期不同，对 debug 不友好
 
 # deb
 1. [vscode](https://code.visualstudio.com/)
@@ -83,8 +84,10 @@ make -j4
     + ```sudo debootstrap --include=openssh-server,curl,tar,gcc,libc6-dev,time,strace,sudo,less,psmisc wheezy wheezy http://archive.debian.org/debian-archive/debian```
     + >refer to https://www.debian.org/releases/wheezy/
     + >http://pub.nethence.com/xen/debootstrap
-4. ```sudo modprobe kvm-intel```
-
+4. 启用 kvm，并将用户添加到 kvm 组
+    + `sudo modprobe kvm`
+    + `sudo modprobe kvm_intel`
+    + `sudo usermod -aG kvm $USER`
 
 # Python3 packet
 ```shell
@@ -98,3 +101,10 @@ see https://github.com/shadowsocks/shadowsocks-qt5/releases and download newest 
 chmod a+x ***.AppImage
 ```
 double clicking (or run it from terminal).
+
+# git
+```bash
+git config --global core.editor "vim"
+# git config --global credential.help cache
+git config --global credential.help store
+```

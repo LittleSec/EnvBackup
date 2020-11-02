@@ -73,7 +73,9 @@
 
 
 # 源码编译开源软件时遇到普通的头文件找不到的问题
-1. `export CFLAGS="-isysroot `xcrun --show-sdk-path`"`
+>或者用自己构建的clang/clang++来编译其他程序时，一般也找不到系统的头文件
+1. ```export CFLAGS="-isysroot `xcrun --show-sdk-path`"```
+2. 或者直接加上编译选项: ``` -isysroot `xcrun --show-sdk-path` ```
 
 
 # compile python
