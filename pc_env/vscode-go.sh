@@ -50,25 +50,29 @@ toollist=(
     golang.org/x/tools # gorename for renaming symbols
                        # guru for the Find all References feature
                        # godoc for the documentation that appears on hover
-                       #     has 2 dependency: (1)golang.org/x/net (2)golang.org/x/xerrors
+                       #     dependency: (1)golang.org/x/net (2)golang.org/x/xerrors
+                       # goimports
+                       #     dependency: (1)golang.org/x/mod
     golang.org/x/lint  # golint or megacheck or golangci-lint or revive for linting
+    golang.org/x/mod   # start with Go 1.11, support package management tool(Go Module)
     github.com/mdempsky/gocode # for auto-completion (not needed if using language server)
     github.com/uudashr/gopkgs # for auto-completion of unimported packages
-                              # has 2 dependency: (1)github.com/karrick/godirwalk (2)github.com/pkg/errors
+                              # dependency: (1)github.com/karrick/godirwalk (2)github.com/pkg/errors
     github.com/ramya-rao-a/go-outline # for symbol search in the current file
     github.com/acroca/go-symbols # for symbol search in the current workspace
     # github.com/cweill/gotests # for generating unit tests
     github.com/fatih/gomodifytags # for modifying tags on structs
+                                  # dependency: (1)github.com/fatih/camelcase (2)github.com/fatih/structtag
     github.com/josharian/impl # for generating stubs for interfaces
     github.com/davidrjenni/reftools # refactoring tools for Go (just use cmd/fillstruct)
     # github.com/skratchdot/open-golang
     # github.com/haya14busa/goplay # for running current file in the Go playground
-    #                              # has 1 dependency: (1)github.com/skratchdot/open-golang
+    #                              # dependency: (1)github.com/skratchdot/open-golang
     # github.com/godoctor/godoctor # The Golang Refactoring Engine
     github.com/go-delve/delve # for debugging
     # github.com/stamblerre/gocode # For a version of gocode that works with Modules
     github.com/rogpeppe/godef # for the Go to Definition feature (not needed if using language server)
-    github.com/zmb3/gogetdoc  # for the documentation that appears on hover (not needed if using language server)
+    # github.com/zmb3/gogetdoc  # for the documentation that appears on hover (not needed if using language server)
 )
 
 # todo: 2. check git succ? =No=> skip some work(go install && dependency)
@@ -80,10 +84,12 @@ git clone https://github.com/golang/net.git golang.org/x/net --depth=1
 git clone https://github.com/golang/xerrors.git golang.org/x/xerrors --depth=1
 git clone https://github.com/golang/tools.git golang.org/x/tools --depth=1
 git clone https://github.com/golang/lint.git golang.org/x/lint --depth=1
+git clone https://github.com/golang/mod.git golang.org/x/mod --depth=1
 go install golang.org/x/tools/cmd/gorename
 go install golang.org/x/tools/cmd/guru
 go install golang.org/x/tools/cmd/godoc
 go install golang.org/x/lint/golint
+go install golang.org/x/tools/cmd/goimports
 
 git clone https://github.com/mdempsky/gocode.git  github.com/mdempsky/gocode --depth=1
 go install github.com/mdempsky/gocode
@@ -91,7 +97,8 @@ go install github.com/mdempsky/gocode
 git clone https://github.com/karrick/godirwalk.git github.com/karrick/godirwalk --depth=1 # don't install
 git clone https://github.com/pkg/errors.git github.com/pkg/errors --depth=1 # don't install
 git clone https://github.com/uudashr/gopkgs.git github.com/uudashr/gopkgs --depth=1 # has 2 dependency
-go install github.com/uudashr/gopkgs/cmd/gopkgs
+# go install github.com/uudashr/gopkgs/cmd/gopkgs
+go install github.com/uudashr/gopkgs/v2/cmd/gopkgs
 
 git clone https://github.com/ramya-rao-a/go-outline.git github.com/ramya-rao-a/go-outline --depth=1
 go install github.com/ramya-rao-a/go-outline
@@ -102,6 +109,8 @@ go install github.com/acroca/go-symbols
 # git clone https://github.com/cweill/gotests.git github.com/cweill/gotests --depth=1
 # go install github.com/cweill/gotests
 
+git clone https://github.com/fatih/camelcase.git github.com/fatih/camelcase --depth=1 # don't install
+git clone https://github.com/fatih/structtag.git github.com/fatih/structtag --depth=1 # don't install
 git clone https://github.com/fatih/gomodifytags.git github.com/fatih/gomodifytags --depth=1
 go install github.com/fatih/gomodifytags
 
@@ -127,8 +136,9 @@ go install github.com/go-delve/delve/cmd/dlv
 git clone https://github.com/rogpeppe/godef.git github.com/rogpeppe/godef --depth=1
 go install github.com/rogpeppe/godef
 
-git clone https://github.com/zmb3/gogetdoc.git github.com/zmb3/gogetdoc --depth=1
-go install github.com/zmb3/gogetdoc
+# Unused
+# git clone https://github.com/zmb3/gogetdoc.git github.com/zmb3/gogetdoc --depth=1
+# go install github.com/zmb3/gogetdoc
 
 popd > /dev/null
 
@@ -136,4 +146,4 @@ popd > /dev/null
 # issue:
 # Q: golang.org/x/tools/go/internal/gcimporter/bexport.go:212: obj.IsAlias undefined (type *types.TypeName has no field or method IsAlias)
 # A: just support go version > 1.9(https://github.com/golang/lint/issues/421)
-#
+#    maybe > 1.11(because Go Mod)
