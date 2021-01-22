@@ -4,6 +4,8 @@ gopls_deps = (
     golang.org/x/tools,
     golang.org/x/mod,
     golang.org/x/sync,
+    golang.org/x/sys,
+    golang.org/x/xerrors,
     github.com/sergi/go-diff,
     honnef.co/go/tools,
     mvdan.cc/gofumpt,
@@ -32,9 +34,13 @@ git clone https://github.com/google/go-cmp.git github.com/google/go-cmp --depth=
 go install github.com/google/go-cmp/cmp
 go install mvdan.cc/gofumpt/format # dependency: (1)github.com/google/go-cmp/cmp
 
+git clone https://github.com/golang/xerrors.git golang.org/x/xerrors --depth=1
 git clone https://github.com/mvdan/xurls.git mvdan.cc/xurls --depth=1
 # git clone https://github.com/mvdan/xurls.git mvdan.cc/xurls/v2 --depth=1
-go install mvdan.cc/xurls
+go install golang.org/x/xerrors
+go install mvdan.cc/xurls # dependency: (1)golang.org/x/xerrors
 # go install mvdan.cc/xurls/v2
 
+git clone https://github.com/golang/sys.git golang.org/x/sys --depth=1
+go install golang.org/x/sys/execabs
 go install golang.org/x/tools/gopls
