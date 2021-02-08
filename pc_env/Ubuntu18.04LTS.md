@@ -67,35 +67,13 @@ mkdir build-qemu && cd build-qemu
 make -j4
 ```
 
-# razzer
-1. see [Firstly](#firstly), [qemu](#qemu).
-2. ```sudo apt install -y python-setuptools quilt libssl-dev dwarfdump libelf-dev```
-## debootstrap wheezy
-1. ```sudo apt install -y debian-keyring debian-archive-keyring```
-2. debootstrap **may need to modifiy**
-    ```shell
-    wget http://ftp.ru.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.115.tar.gz
-    tar xzf debootstrap_1.0.114.tar.gz 
-    cd debootstrap/
-    sudo make install
-    debootstrap --version
-    ```
-3. modify razzer/scripts/misc/create-image.sh: **http://archive.debian.org/debian-archive/debian**
-    + ```sudo debootstrap --include=openssh-server,curl,tar,gcc,libc6-dev,time,strace,sudo,less,psmisc wheezy wheezy http://archive.debian.org/debian-archive/debian```
-    + >refer to https://www.debian.org/releases/wheezy/
-    + >http://pub.nethence.com/xen/debootstrap
-4. 启用 kvm，并将用户添加到 kvm 组
-    + `sudo modprobe kvm`
-    + `sudo modprobe kvm_intel`
-    + `sudo usermod -aG kvm $USER`
-
 # Python3 packet
 ```shell
 sudo apt install -y python3-dev python3-pip
 pip3 install ipython numpy panda virtualenv
 ```
 
-# shadowsocks
+# shadowsocks(abandon)
 ```shell
 see https://github.com/shadowsocks/shadowsocks-qt5/releases and download newest version
 chmod a+x ***.AppImage
