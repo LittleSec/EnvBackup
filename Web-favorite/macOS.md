@@ -94,3 +94,10 @@
 # MacOS 10.13 以上不再自带ftp等
 1. `brew install inetutils`
 2. 从源码安装[`inetutils`](http://ftp.gnu.org/gnu/inetutils)
+
+# 网页长截图留档
+1. 使用 Chrome 浏览器 59 或更高版本 `chrome://settings/help`
+2. 进入待截图的网页
+3. 按下 `F12` 快捷键（或鼠标右键 >> 审查元素），调出 Web 开发者工具
+4. 按下 `Ctrl + Shift + P` 快捷键，调出指令执行界面
+5. 输入 `Capture full size screenshot`（支持模糊搜索）指令（该指令中文环境下为“捕获全尺寸屏幕截图”），点击或回车

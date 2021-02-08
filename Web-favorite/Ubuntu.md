@@ -170,4 +170,19 @@
 5. 卸载
     + `sudo rmmod kvm`
 
+# kvm_put_msrs: Assertion `ret == cpu->kvm_msr_buf->nmsrs
+1. 该文件 `/etc/modprobe.d/qemu-system-x86.conf`, 加入如下两行
+    + `options kvm_intel nested=1`(或`options kvm_intel nested=1 # enable_apicv=n`)
+    + `options kvm ignore_msrs=1`
+
+
 # ln -s src tgr 的 src 最好用绝对路径
+
+# asm/errno.h: No such file or directory
+1. `sudo apt install gcc-multilib`
+2. `ln -s /usr/include/asm-generic /usr/include/asm`
+    + `ln -s /usr/include/x86_64-linux-gnu/asm /usr/include/asm`
+
+# cloc: Can't use an undefined value as an ARRAY reference
+1. 该问题只在的 cloc --version 1.60版本出现，ubuntu 16.04 的apt源默认的版本是的1.60，所以要么换系统，要么不要使用 apt 安装
+    + https://github.com/AlDanial/cloc/issues/126

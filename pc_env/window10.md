@@ -15,3 +15,7 @@
 
 # pdf
 1. [Gaaiho Reader](https://www.gaaiho.com/index.php/zh-cn/)
+
+# 如何让 Windows 后台一直运行 Python 程序
+1. 将python.exe替换成pythonw.exe, 程序就可以在Windows后台执行, 不显示命令提示符窗口
+2. 另一种方法是修改脚本的扩展名为".pyw"，双击即可后台运行，不需要修改任何代码
