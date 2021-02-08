@@ -34,3 +34,7 @@
         - $fileNameWithoutExt 
     + 参考: https://zhuanlan.zhihu.com/p/54861567
 10. [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
+
+# Err
+1. The terminal process failed to launch: Starting directory (cwd) "xxx" does not exist.
+    + 路径有非法字符(如含中文)，要么改路径，要么修改配置项:`"terminal.integrated.splitCwd"`不为`"inherited"`即可
