@@ -41,7 +41,9 @@ cd llvm-project
 mkdir -p install
 mkdir -p build 
 cd build
-cmake -G "Unix Makefiles" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lld" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$(pwd)/../install ../llvm
+cmake -G "Unix Makefiles" -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra;libcxx;libcxxabi;lld" -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/mybin/llvm ../llvm
+# cmake -G "Unix Makefiles" -DLLVM_ENABLE_PROJECTS='clang;lld;compiler-rt;libcxx;libcxxabi;lld' -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug -DLLVM_TARGETS_TO_BUILD='AArch64;ARM;BPF;X86' -DCMAKE_INSTALL_PREFIX='/path/to'  ../llvm
+
 make -j4
 sudo make install
 ```

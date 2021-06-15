@@ -186,3 +186,12 @@
 # cloc: Can't use an undefined value as an ARRAY reference
 1. 该问题只在的 cloc --version 1.60版本出现，ubuntu 16.04 的apt源默认的版本是的1.60，所以要么换系统，要么不要使用 apt 安装
     + https://github.com/AlDanial/cloc/issues/126
+
+
+# there is no application installed for AppImage
+1. 修改权限 `chmod +x *.AppImage`
+
+
+# ipython, when use Tab for autocomplete, will err and exit
+>unsure solution
+1. pip3 unnstall jedi pyreadline
