@@ -55,6 +55,12 @@ PhASAR a LLVM-based Static Analysis Framework
 
     # testing
     ./phasar --help
+
+    # run ifds uninitialized variables
+    # it defaultly use config/glibc_function_list_v1-04.05.17.conf
+    # (the path has hard code)
+    # so, it should run in project path
+    ./build/phasar -m path/to/example1.ll -D ifds-uninit
     ```
 
 4. `install-llvm-5.0.1.sh`会在llvm-5.0.1目录下git clone并构建binutils，构建过程中可能会失败，暂时未发现构建失败有什么影响
