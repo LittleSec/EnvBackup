@@ -41,8 +41,32 @@ SRC_URL=https://wx2.sinaimg.cn/large
 
 succ_cnt=0
 fail_cnt=0
+invalid_cnt=0
+file_cnt=`ls $1 | wc -w`
+cur_i=0
+
+process_icon=("\\" "|" "/" "-")
+
+function isPicFile() {
+  pic_file_ext=("jpg" "jpeg")
+  for i in ${pic_file_ext[@]}; do
+    if [ $i == $1 ] ; then
+      return 1
+    fi
+  done
+  return 0
+}
 
 for fjpg in `ls $1`; do
+  let cur_i+=1
+  let icon_i=cur_i%4
+  printf "%d/%d %c\r" "$cur_i" "$file_cnt" "${process_icon[$icon_i]}"
+  fext=${fjpg##*.}
+  isPicFile $fext
+  if [ $? -ne 1 ] ; then
+    let invalid_cnt+=1
+    continue
+  fi
   read -u 4 # get token
   {
     cmd="$WGET_PATH $SRC_URL/$fjpg -o /dev/null"
@@ -52,7 +76,7 @@ for fjpg in `ls $1`; do
       echo "[-] fail: $fjpg"
       let fail_cnt+=1
     else
-      echo "[+] succ: $fjpg"
+      # echo "[+] succ: $fjpg"
       let succ_cnt+=1
     fi
     echo >&4 # set toker
@@ -63,8 +87,9 @@ wait
 exec 4>&-
 exec 4<&-
 
-echo "===== Summary ====="
-echo "   succ: $succ_cnt"
-echo "   fail: $fail_cnt"
-echo "==================="
+echo "====== Summary ======"
+echo "   succ   : $succ_cnt"
+echo "   fail   : $fail_cnt"
+echo "   invalid: $invalid_cnt"
+echo "====================="
 echo "[+] Done"
